@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 import {
   GameResponseType,
   gamesForTodayResponse,
-} from '../types/gamesForTodayResponse';
+} from '../types/GameResponseType';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { Game } from '../entities/game.entity';
 import { GameService } from '../services/game.service';
