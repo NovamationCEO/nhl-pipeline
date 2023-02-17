@@ -9,14 +9,17 @@ export class Game {
   nhlId: number;
 
   @Column()
-  link: string;
+  gameDate: string;
 
   @Column()
-  gameDate: Date;
+  gameTime: Date;
 
   @Column()
   awayTeam: number;
 
   @Column()
   homeTeam: number;
+
+  @Column()
+  status: number;
 }

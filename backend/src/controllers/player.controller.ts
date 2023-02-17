@@ -16,11 +16,6 @@ export class PlayerController {
     return this.playerService.create(player);
   }
 
-  @Get()
-  async cronIt(): Promise<any> {
-    return this.cronService.fetchDataFromApi();
-  }
-
   @Get(':id')
   async findById(@Param('id') id: number): Promise<Player> {
     return this.playerService.findById(id);
