@@ -1,5 +1,9 @@
 import { Controller, Post, Body, Get, Param, Delete } from '@nestjs/common';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
+import {
+  GameResponseType,
+  gamesForTodayResponse,
+} from '../types/gamesForTodayResponse';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { Game } from '../entities/game.entity';
 import { GameService } from '../services/game.service';
@@ -45,18 +49,17 @@ export class GameController {
   }
 }
 
-function processGamesForToday(response: any) {
+function processGamesForToday(response: AxiosResponse<any, any>) {
   const data = response?.data?.dates?.[0];
   if (!data) {
     return [];
   }
 
-  const today = data.date;
-  console.log(data.games);
-  const games: Game[] = data.games.map((nhlGame) => {
+  const games: Game[] = data.games.map((nhlGame: GameResponseType) => {
+    if (!nhlGame) return undefined;
     return {
       nhlId: nhlGame.gamePk,
-      gameDate: today,
+      gameDate: data.date,
       gameTime: new Date(nhlGame.gameDate),
       homeTeam: nhlGame.teams.home.team.id,
       awayTeam: nhlGame.teams.away.team.id,
