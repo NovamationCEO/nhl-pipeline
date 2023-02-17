@@ -2,7 +2,7 @@ import { Controller, Post, Body, Get, Param } from '@nestjs/common';
 import { Player } from '../entities/player.entity';
 import { PlayerService } from '../services/player.service';
 
-@Controller('players')
+@Controller('player')
 export class PlayerController {
   constructor(private readonly playerService: PlayerService) {}
 

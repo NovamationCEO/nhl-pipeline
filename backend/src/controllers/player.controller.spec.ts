@@ -28,7 +28,7 @@ describe('Player Controller', () => {
 
   it('should return 3', () => {
     return request(app.getHttpServer())
-      .get('/players/3')
+      .get('/player/3')
       .expect(200)
       .expect('getById 3');
   });

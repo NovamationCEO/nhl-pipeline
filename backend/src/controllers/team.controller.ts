@@ -2,7 +2,7 @@ import { Controller, Post, Body } from '@nestjs/common';
 import { Team } from '../entities/team.entity';
 import { TeamService } from '../services/team.service';
 
-@Controller('teams')
+@Controller('team')
 export class TeamController {
   constructor(private readonly teamService: TeamService) {}
 
