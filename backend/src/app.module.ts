@@ -9,10 +9,15 @@ import { Team } from './entities/team.entity';
 import { PlayerService } from './services/player.service';
 import { TeamService } from './services/team.service';
 import * as mysql from 'mysql2';
+import * as cron from 'node-cron';
+import { CronService } from './cron/cron.service';
+import { GameController } from './controllers/game.controller';
+import { GameService } from './services/game.service';
+import { Game } from './entities/game.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Player, Team]),
+    TypeOrmModule.forFeature([Player, Team, Game]),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
@@ -25,7 +30,18 @@ import * as mysql from 'mysql2';
       driver: mysql,
     }),
   ],
-  controllers: [AppController, PlayerController, TeamController],
-  providers: [AppService, PlayerService, TeamService],
+  controllers: [
+    AppController,
+    PlayerController,
+    TeamController,
+    GameController,
+  ],
+  providers: [AppService, PlayerService, TeamService, CronService, GameService],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private cronService: CronService) {
+    cron.schedule('0 * * * *', () => {
+      this.cronService.fetchDataFromApi();
+    });
+  }
+}
