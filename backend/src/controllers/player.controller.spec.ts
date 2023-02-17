@@ -26,10 +26,10 @@ describe('Player Controller', () => {
       .expect('Hello World!');
   });
 
-  it('should return 3', () => {
+  it('should return nothing for an invalid player id', () => {
     return request(app.getHttpServer())
-      .get('/player/3')
+      .get('/player/-1')
       .expect(200)
-      .expect('getById 3');
+      .expect('');
   });
 });

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { Team } from '../entities/team.entity';
 
 @Injectable()
@@ -12,5 +12,21 @@ export class TeamService {
 
   async create(team: Team): Promise<Team> {
     return this.teamRepository.save(team);
+  }
+
+  async findById(id: number): Promise<Team> {
+    return this.teamRepository.findOneBy({ id });
+  }
+
+  async findByNhlId(id: number): Promise<Team> {
+    return this.teamRepository.findOneBy({ nhlId: id });
+  }
+
+  async update(id: number, team: Partial<Team>): Promise<UpdateResult> {
+    return this.teamRepository.update(id, team);
+  }
+
+  async remove(id: number): Promise<DeleteResult> {
+    return this.teamRepository.delete({ id });
   }
 }

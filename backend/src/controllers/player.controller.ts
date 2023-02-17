@@ -1,4 +1,5 @@
-import { Controller, Post, Body, Get, Param } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, Delete } from '@nestjs/common';
+import { DeleteResult, UpdateResult } from 'typeorm';
 import { Player } from '../entities/player.entity';
 import { PlayerService } from '../services/player.service';
 
@@ -12,7 +13,30 @@ export class PlayerController {
   }
 
   @Get(':id')
-  async findById(@Param('id') id: string): Promise<string> {
-    return 'getById ' + id;
+  async findById(@Param('id') id: number): Promise<Player> {
+    return this.playerService.findById(id);
+  }
+
+  @Get('nhl/:id')
+  async findByNhlId(@Param('id') id: number): Promise<Player> {
+    return this.playerService.findByNhlId(id);
+  }
+
+  @Get('team/:id')
+  async findByTeamId(@Param('id') id: number): Promise<Player[]> {
+    return this.playerService.findByTeam(id);
+  }
+
+  @Post(':id')
+  async update(
+    @Param('id') id: number,
+    @Body() player: Player,
+  ): Promise<UpdateResult> {
+    return this.playerService.update(id, player);
+  }
+
+  @Delete(':id')
+  async remove(@Param('id') id: number): Promise<DeleteResult> {
+    return this.playerService.remove(id);
   }
 }
