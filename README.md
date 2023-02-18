@@ -32,6 +32,8 @@ I should probably move to-dos here and away from Trello, to provide some transpa
 
 - Game.  What's the difference between 'goals' and 'points?'  Examine docs.
 
+- Can a 'Left Wing' player become a 'Right Wing,' or is that a descriptor of the player himself?
+
 - Testing.  I haven't wanted to test just database functioning, but it's starting to get into 'real' logic.
 
 - 'Live' status.  What does that mean?
@@ -42,4 +44,6 @@ I should probably move to-dos here and away from Trello, to provide some transpa
     - Can likely be solved by list of matches.
 
 - Tie tables together with foreign keys.  Make sure they're populated in the right order, still.
+
+- Players are not populated.  Under what conditions will that information be wanted?
 
