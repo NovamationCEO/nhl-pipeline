@@ -19,9 +19,7 @@ I should probably move to-dos here and away from Trello, to provide some transpa
 
 - Create APIs with 'pretty' output to meet requirements.
 
-- Player Age, Player Number, Player Position
-    -   Are these going to change?  If so, should they be separate from the Player entity?
-    -   When are these going to be assessed, and how not to screw up historical data?
+- Save player age as birthdate, calculate on fly when needed.
 
 - Consider adding historical data if the database is empty enough to be boring.
 
@@ -29,10 +27,6 @@ I should probably move to-dos here and away from Trello, to provide some transpa
     - Can setting up database be automated in a reasonable amount of time?
 
 - Game.  Add 'assists,' 'hits,' and 'penalty minutes.'
-
-- Game.  What's the difference between 'goals' and 'points?'  Examine docs.
-
-- Can a 'Left Wing' player become a 'Right Wing,' or is that a descriptor of the player himself?
 
 - Testing.  I haven't wanted to test just database functioning, but it's starting to get into 'real' logic.
 
@@ -46,4 +40,10 @@ I should probably move to-dos here and away from Trello, to provide some transpa
 - Tie tables together with foreign keys.  Make sure they're populated in the right order, still.
 
 - Players are not populated.  Under what conditions will that information be wanted?
+
+# HOCKEY GENERAL INFORMATION
+
+- Player numbers are consistent, always.
+- Player positions are consistent -- unless there's a team shake-up.  We might just have to ignore this to keep in scope.
+- There's no statistical difference between goals and points.  One could argue that a 'goal' is an event, while a 'point' is a fact.
 
