@@ -14,17 +14,13 @@ import { GameController } from './controllers/game.controller';
 import { GameService } from './services/game.service';
 import { Game } from './entities/game.entity';
 import { initDailyGames } from './processes/initDailyGames';
+import { sharedDataSourceSettings } from './data-source';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Player, Team, Game]),
     TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'pipeline_app',
-      password: 'Keep Your Stick',
-      database: 'nhl_db',
+      ...sharedDataSourceSettings,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
       driver: mysql,
