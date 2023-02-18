@@ -35,10 +35,12 @@ export async function checkTodaysGames(
     }
 
     try {
-      const huh = await gameService.update(match.id, game);
-      console.log({ huh });
-      console.info('Updated DB entry for ' + gameName);
-      console.log('\n');
+      const response = await gameService.update(match.id, game);
+      const msg = ' DB entry for ' + gameName + ' (' + match.id + ')\n';
+
+      response.affected === 1
+        ? console.info('Updated' + msg)
+        : console.error('Did not update' + msg);
     } catch (err) {
       console.error(err);
     }
