@@ -38,13 +38,14 @@ export class AppModule {
   constructor(
     private gameService: GameService,
     private teamService: TeamService,
+    private playerService: PlayerService,
   ) {
     // Initial setup, because this is running locally and is often 'off.'
-    initDailyGames(gameService, teamService);
+    initDailyGames(gameService, teamService, playerService);
 
     // Cron for ongoing global-level tasks
     cron.schedule('0 0,12 * * *', () => {
-      initDailyGames(gameService, teamService);
+      initDailyGames(gameService, teamService, playerService);
     });
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import { DeleteResult, In, Repository, UpdateResult } from 'typeorm';
 import { Player } from '../entities/player.entity';
 
 @Injectable()
@@ -20,6 +20,10 @@ export class PlayerService {
 
   async findByNhlId(id: number): Promise<Player> {
     return this.playerRepository.findOneBy({ nhlId: id });
+  }
+
+  async findByNhlIds(ids: number[]): Promise<Player[]> {
+    return this.playerRepository.findBy({ nhlId: In(ids) });
   }
 
   async findByTeam(id: number): Promise<Player[]> {
