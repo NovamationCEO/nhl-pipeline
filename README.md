@@ -17,9 +17,6 @@ I should probably move to-dos here and away from Trello, to provide some transpa
 
 - Curate that list of matches; close when appropriate.
 
-- Create APIs with 'pretty' output to meet requirements.
-
-- Save player age as birthdate, calculate on fly when needed.
 
 - Consider adding historical data if the database is empty enough to be boring.
 
@@ -27,6 +24,8 @@ I should probably move to-dos here and away from Trello, to provide some transpa
     - Can setting up database be automated in a reasonable amount of time?
 
 - Game.  Add 'assists,' 'hits,' and 'penalty minutes.'
+    - Does not come from Schedule
+    
 
 - Testing.  I haven't wanted to test just database functioning, but it's starting to get into 'real' logic.
 
@@ -40,6 +39,9 @@ I should probably move to-dos here and away from Trello, to provide some transpa
 - Tie tables together with foreign keys.  Make sure they're populated in the right order, still.
 
 - Players are not populated.  Under what conditions will that information be wanted?
+
+- Create APIs with 'pretty' output to meet requirements.
+
 
 # HOCKEY GENERAL INFORMATION
 

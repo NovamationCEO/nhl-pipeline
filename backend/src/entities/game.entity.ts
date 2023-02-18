@@ -28,4 +28,13 @@ export class Game {
 
   @Column()
   homeScore: number;
+
+  @Column()
+  assists: number;
+
+  @Column()
+  hits: number;
+
+  @Column()
+  penaltyMinutes: number;
 }

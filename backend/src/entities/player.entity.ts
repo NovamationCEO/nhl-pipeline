@@ -19,4 +19,10 @@ export class Player {
 
   @Column()
   currentTeam: number;
+
+  @Column()
+  birthdate: Date;
+
+  @Column()
+  position: string;
 }
