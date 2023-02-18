@@ -5,10 +5,16 @@ import { Game } from '../entities/game.entity';
 import { getMatch } from 'src/utilities/getMatch';
 import { checkTodaysTeams } from './checkTodaysTeams';
 import { checkTodaysGames } from './checkTodaysGames';
+import { getTodaysPlayers } from './getTodaysPlayers';
+import { formatGamesForToday } from '../utilities/formatGamesForToday';
+import { formatPlayersForToday } from '../utilities/formatPlayersForToday';
+import { Player } from '../entities/player.entity';
+import { PlayerService } from '../services/player.service';
 
 export async function initDailyGames(
   gameService: GameService,
   teamService: TeamService,
+  playerService: PlayerService,
 ): Promise<true | string> {
   let games: Game[];
 
@@ -16,7 +22,7 @@ export async function initDailyGames(
     const response = await axios.get(
       'https://statsapi.web.nhl.com/api/v1/schedule',
     );
-    games = await gameService.formatGamesForToday(response);
+    games = formatGamesForToday(response);
     console.info(games.length + ' games Found. \n', games);
   } catch (err) {
     return err.toString();
@@ -34,6 +40,8 @@ export async function initDailyGames(
   }
 
   await checkTodaysGames(games, gameService);
+
+  const todaysPlayers = await getTodaysPlayers(games);
 
   return true;
 }

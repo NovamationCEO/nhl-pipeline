@@ -1,5 +1,6 @@
 import { Controller, Post, Body, Get, Param, Delete } from '@nestjs/common';
 import axios from 'axios';
+import { formatGamesForToday } from '../utilities/formatGamesForToday';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { Game } from '../entities/game.entity';
 import { GameService } from '../services/game.service';
@@ -13,7 +14,7 @@ export class GameController {
     const response = await axios.get(
       'https://statsapi.web.nhl.com/api/v1/schedule',
     );
-    return this.gameService.formatGamesForToday(response);
+    return formatGamesForToday(response);
   }
 
   @Post()
