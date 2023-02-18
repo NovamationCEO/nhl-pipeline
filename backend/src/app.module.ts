@@ -35,15 +35,16 @@ import { sharedDataSourceSettings } from './data-source';
   providers: [AppService, PlayerService, TeamService, GameService],
 })
 export class AppModule {
-  // constructor(private processService: ProcessService) {
-  //   cron.schedule('0 0,12 * * *', () => {
-  //     this.processService.initDailyGames();
-  //   });
-  // }
   constructor(
     private gameService: GameService,
     private teamService: TeamService,
   ) {
+    // Initial setup, because this is running locally and is often 'off.'
     initDailyGames(gameService, teamService);
+
+    // Cron for ongoing global-level tasks
+    cron.schedule('0 0,12 * * *', () => {
+      initDailyGames(gameService, teamService);
+    });
   }
 }
