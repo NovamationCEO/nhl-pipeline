@@ -17,7 +17,7 @@ export async function checkTodaysGames(
       try {
         console.info('Found new game: ' + gameName);
         await gameService.create(game);
-        console.info('Created DB entry for ' + gameName);
+        console.info('Created DB entry for ' + gameName + '\n');
       } catch (err) {
         console.error(err);
       }
@@ -30,7 +30,7 @@ export async function checkTodaysGames(
       console.log(Number(game[key]), Number(match[key])),
     );
 
-    if (updateKeys.every((key) => Number(game[key]) === Number(match[key]))) {
+    if (updateKeys.every((key) => game[key] === match[key])) {
       continue;
     }
 

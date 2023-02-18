@@ -31,7 +31,7 @@ export async function checkTodaysTeams(
 
         console.info('Found new team: ' + newTeam.name);
         await teamService.create(newTeam);
-        console.info('Created DB entry for ' + newTeam.teamName);
+        console.info('Created DB entry for ' + newTeam.teamName + '\n');
       } catch (err) {
         console.error(err);
       }

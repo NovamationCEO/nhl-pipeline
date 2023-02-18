@@ -21,7 +21,7 @@ export class Game {
   homeTeam: number;
 
   @Column()
-  status: number;
+  status: string;
 
   @Column()
   awayScore: number;
