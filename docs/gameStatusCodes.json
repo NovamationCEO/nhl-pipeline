@@ -1,0 +1,49 @@
+[
+  {
+    "code": "1",
+    "abstractGameState": "Preview",
+    "detailedState": "Scheduled"
+  },
+  {
+    "code": "2",
+    "abstractGameState": "Preview",
+    "detailedState": "Pre-Game"
+  },
+  {
+    "code": "3",
+    "abstractGameState": "Live",
+    "detailedState": "In Progress"
+  },
+  {
+    "code": "4",
+    "abstractGameState": "Live",
+    "detailedState": "In Progress - Critical"
+  },
+
+  {
+    "code": "5",
+    "abstractGameState": "Final",
+    "detailedState": "Game Over"
+  },
+  {
+    "code": "6",
+    "abstractGameState": "Final",
+    "detailedState": "Final"
+  },
+  {
+    "code": "7",
+    "abstractGameState": "Final",
+    "detailedState": "Final"
+  },
+
+  {
+    "code": "8",
+    "abstractGameState": "Preview",
+    "detailedState": "Scheduled (Time TBD)"
+  },
+  {
+    "code": "9",
+    "abstractGameState": "Preview",
+    "detailedState": "Postponed"
+  }
+]

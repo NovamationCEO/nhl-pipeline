@@ -1,6 +1,5 @@
 import { Controller, Post, Body, Get, Param, Delete } from '@nestjs/common';
-import axios, { AxiosResponse } from 'axios';
-import { GameResponseType } from '../types/GameResponseType';
+import axios from 'axios';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { Game } from '../entities/game.entity';
 import { GameService } from '../services/game.service';

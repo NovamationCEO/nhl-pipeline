@@ -23,7 +23,7 @@ I should probably move to-dos here and away from Trello, to provide some transpa
 
 - Player Age, Player Number, Player Position
     -   Are these going to change?  If so, should they be separate from the Player entity?
-    -   When are these assessed, and how not to screw up historical data?
+    -   When are these going to be assessed, and how not to screw up historical data?
 
 - Consider adding historical data if the database is empty enough to be boring.
 
@@ -43,4 +43,6 @@ I should probably move to-dos here and away from Trello, to provide some transpa
     - Can likely be solved by list of matches.
 
 - What are the possible values for 'status?'  1 seems to be not started, and 7 completed.
+
+- Tie tables together with foreign keys.  Make sure they're populated in the right order, still.
 
