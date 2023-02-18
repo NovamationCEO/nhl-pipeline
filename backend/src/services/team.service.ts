@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import { DeleteResult, In, Repository, UpdateResult } from 'typeorm';
 import { Team } from '../entities/team.entity';
 
 @Injectable()
@@ -10,7 +10,7 @@ export class TeamService {
     private readonly teamRepository: Repository<Team>,
   ) {}
 
-  async create(team: Team): Promise<Team> {
+  async create(team: Partial<Team>): Promise<Team> {
     return this.teamRepository.save(team);
   }
 
@@ -20,6 +20,10 @@ export class TeamService {
 
   async findByNhlId(id: number): Promise<Team> {
     return this.teamRepository.findOneBy({ nhlId: id });
+  }
+
+  async findByNhlIds(ids: number[]): Promise<Team[]> {
+    return this.teamRepository.findBy({ nhlId: In(ids) });
   }
 
   async update(id: number, team: Partial<Team>): Promise<UpdateResult> {

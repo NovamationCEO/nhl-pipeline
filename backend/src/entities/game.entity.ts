@@ -22,4 +22,10 @@ export class Game {
 
   @Column()
   status: number;
+
+  @Column()
+  awayScore: number;
+
+  @Column()
+  homeScore: number;
 }

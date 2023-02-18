@@ -10,10 +10,10 @@ import { PlayerService } from './services/player.service';
 import { TeamService } from './services/team.service';
 import * as mysql from 'mysql2';
 import * as cron from 'node-cron';
-import { CronService } from './cron/cron.service';
 import { GameController } from './controllers/game.controller';
 import { GameService } from './services/game.service';
 import { Game } from './entities/game.entity';
+import { initDailyGames } from './processes/initDailyGames';
 
 @Module({
   imports: [
@@ -36,12 +36,18 @@ import { Game } from './entities/game.entity';
     TeamController,
     GameController,
   ],
-  providers: [AppService, PlayerService, TeamService, CronService, GameService],
+  providers: [AppService, PlayerService, TeamService, GameService],
 })
 export class AppModule {
-  constructor(private cronService: CronService) {
-    cron.schedule('0 * * * *', () => {
-      this.cronService.fetchDataFromApi();
-    });
+  // constructor(private processService: ProcessService) {
+  //   cron.schedule('0 0,12 * * *', () => {
+  //     this.processService.initDailyGames();
+  //   });
+  // }
+  constructor(
+    private gameService: GameService,
+    private teamService: TeamService,
+  ) {
+    initDailyGames(gameService, teamService);
   }
 }

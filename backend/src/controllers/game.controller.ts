@@ -1,9 +1,6 @@
 import { Controller, Post, Body, Get, Param, Delete } from '@nestjs/common';
 import axios, { AxiosResponse } from 'axios';
-import {
-  GameResponseType,
-  gamesForTodayResponse,
-} from '../types/GameResponseType';
+import { GameResponseType } from '../types/GameResponseType';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { Game } from '../entities/game.entity';
 import { GameService } from '../services/game.service';
@@ -17,7 +14,7 @@ export class GameController {
     const response = await axios.get(
       'https://statsapi.web.nhl.com/api/v1/schedule',
     );
-    return processGamesForToday(response);
+    return this.gameService.formatGamesForToday(response);
   }
 
   @Post()
@@ -47,25 +44,4 @@ export class GameController {
   async remove(@Param('id') id: number): Promise<DeleteResult> {
     return this.gameService.remove(id);
   }
-}
-
-function processGamesForToday(response: AxiosResponse<any, any>) {
-  const data = response?.data?.dates?.[0];
-  if (!data) {
-    return [];
-  }
-
-  const games: Game[] = data.games.map((nhlGame: GameResponseType) => {
-    if (!nhlGame) return undefined;
-    return {
-      nhlId: nhlGame.gamePk,
-      gameDate: data.date,
-      gameTime: new Date(nhlGame.gameDate),
-      homeTeam: nhlGame.teams.home.team.id,
-      awayTeam: nhlGame.teams.away.team.id,
-      status: nhlGame.status.statusCode,
-    };
-  });
-
-  return games;
 }

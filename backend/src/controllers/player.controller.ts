@@ -1,15 +1,11 @@
 import { Controller, Post, Body, Get, Param, Delete } from '@nestjs/common';
-import { CronService } from 'src/cron/cron.service';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { Player } from '../entities/player.entity';
 import { PlayerService } from '../services/player.service';
 
 @Controller('player')
 export class PlayerController {
-  constructor(
-    private readonly playerService: PlayerService,
-    private readonly cronService: CronService,
-  ) {}
+  constructor(private readonly playerService: PlayerService) {}
 
   @Post()
   async create(@Body() player: Player): Promise<Player> {
