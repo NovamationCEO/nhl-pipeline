@@ -3,20 +3,20 @@ import { GameService } from '../services/game.service';
 import { getMatch } from '../utilities/getMatch';
 
 export async function checkTodaysGames(
-  games: Game[],
+  newGames: Game[],
   gameService: GameService,
 ) {
-  const gameNhlIds = games.map((game) => game.nhlId);
+  const gameNhlIds = newGames.map((game) => game.nhlId);
   const knownGames = await gameService.findByNhlIds(gameNhlIds);
 
-  for (const game of games) {
-    const match = getMatch(game, knownGames, 'nhlId');
-    const gameName = game.homeTeam + ' v ' + game.awayTeam;
+  for (const newGame of newGames) {
+    const match = getMatch(newGame, knownGames, 'nhlId');
+    const gameName = newGame.homeTeam + ' v ' + newGame.awayTeam;
 
     if (!match) {
       try {
         console.info('Found new game: ' + gameName);
-        await gameService.create(game);
+        await gameService.create(newGame);
         console.info('Created DB entry for ' + gameName + '\n');
       } catch (err) {
         console.error(err);
@@ -26,16 +26,12 @@ export async function checkTodaysGames(
 
     const updateKeys = ['nhlId', 'status', 'homeScore', 'awayScore'];
 
-    updateKeys.forEach((key) =>
-      console.log(Number(game[key]), Number(match[key])),
-    );
-
-    if (updateKeys.every((key) => game[key] === match[key])) {
+    if (updateKeys.every((key) => newGame[key] === match[key])) {
       continue;
     }
 
     try {
-      const response = await gameService.update(match.id, game);
+      const response = await gameService.update(match.id, newGame);
       const msg = ' DB entry for ' + gameName + ' (' + match.id + ')\n';
 
       response.affected === 1
