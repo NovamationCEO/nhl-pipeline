@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { Player } from 'src/entities/player.entity';
+import { Player } from '../entities/player.entity';
 import { Game } from '../entities/game.entity';
 import { GameResponseType } from '../types/GameResponseType';
 
@@ -23,9 +23,6 @@ export function formatPlayersForToday(response: AxiosResponse<any, any>) {
       players = players.concat(newPlayer);
     });
   });
-
-  console.log(players);
-  console.log('QUIJIBO');
 
   const games: any[] = data.games.map((nhlGame: GameResponseType) => {
     if (!nhlGame) return undefined;

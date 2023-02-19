@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Game } from 'src/entities/game.entity';
+import { Game } from '../entities/game.entity';
 import { TeamService } from '../services/team.service';
 
 export async function checkTodaysTeams(

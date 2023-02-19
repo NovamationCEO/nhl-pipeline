@@ -2,7 +2,7 @@ import axios from 'axios';
 import { GameService } from '../services/game.service';
 import { TeamService } from '../services/team.service';
 import { Game } from '../entities/game.entity';
-import { getMatch } from 'src/utilities/getMatch';
+import { getMatch } from '../utilities/getMatch';
 import { checkTodaysTeams } from './checkTodaysTeams';
 import { checkTodaysGames } from './checkTodaysGames';
 import { getTodaysPlayers } from './getTodaysPlayers';

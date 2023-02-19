@@ -1,5 +1,5 @@
-import { Player } from 'src/entities/player.entity';
-import { PlayerService } from 'src/services/player.service';
+import { Player } from '../entities/player.entity';
+import { PlayerService } from '../services/player.service';
 import { getMatch } from '../utilities/getMatch';
 
 export async function checkTodaysPlayers(

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { formatPlayersForToday } from 'src/utilities/formatPlayersForToday';
+import { formatPlayersForToday } from '../utilities/formatPlayersForToday';
 import { Game } from '../entities/game.entity';
 import { Player } from '../entities/player.entity';
 import { formatGamesForToday } from '../utilities/formatGamesForToday';
