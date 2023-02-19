@@ -24,7 +24,7 @@ export async function checkTodaysGames(
       continue;
     }
 
-    const updateKeys = ['nhlId', 'status', 'homeScore', 'awayScore'];
+    const updateKeys = ['status', 'homeScore', 'awayScore'];
 
     if (updateKeys.every((key) => newGame[key] === match[key])) {
       continue;
