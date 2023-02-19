@@ -1,9 +1,11 @@
+import { Optional } from '@nestjs/common';
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
 export class Game {
   @PrimaryGeneratedColumn()
-  id: number;
+  @Optional()
+  id?: number;
 
   @Column()
   nhlId: number;
