@@ -77,20 +77,20 @@ export async function checkTodaysPlayers(
 
       const newPlayer = formatNewPlayer(playerData);
       payloads.push(newPlayer);
-      process.stdout.write(`${count}\r`);
+      process.stdout.write(`\r${count}`);
       count++;
     } catch (err) {
       console.error(err);
     }
   }
 
-  console.info('Saving new players. \n');
+  console.info('\nSaving new players. \n');
 
   for (const payload of payloads) {
     try {
       await playerService.create(payload);
       playerNames.push(payload.fullName);
-      process.stdout.write(`${count}\r`);
+      process.stdout.write(`\r${count}`);
       count--;
     } catch (err) {
       console.error(err);
@@ -98,7 +98,7 @@ export async function checkTodaysPlayers(
   }
 
   console.info(
-    'Added ' +
+    '\nAdded ' +
       playerNames.length +
       ' new players of an expected ' +
       payloads.length +
