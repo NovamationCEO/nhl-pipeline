@@ -1,5 +1,5 @@
 import { Optional } from '@nestjs/common';
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, Index } from 'typeorm';
 
 @Entity()
 export class Game {
@@ -8,6 +8,7 @@ export class Game {
   id?: number;
 
   @Column()
+  @Index()
   nhlId: number;
 
   @Column()

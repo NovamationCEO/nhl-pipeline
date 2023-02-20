@@ -1,18 +1,21 @@
-import { Entity, PrimaryGeneratedColumn, Column, PrimaryColumn } from 'typeorm';
+import { Optional } from '@nestjs/common';
+import { Entity, PrimaryGeneratedColumn, Column, Index } from 'typeorm';
 
 @Entity()
 export class Player {
   @PrimaryGeneratedColumn()
-  id: number;
+  @Optional()
+  id?: number;
 
-  @PrimaryColumn()
+  @Column()
+  @Index()
   nhlId: number;
 
   @Column()
   fullName: string;
 
   @Column()
-  primaryNumber: number;
+  primaryNumber: string;
 
   @Column()
   active: boolean;
