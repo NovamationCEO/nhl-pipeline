@@ -1,31 +1,33 @@
+import axios from 'axios';
+import { PlayerResponseType } from '../types/PlayerResponseType';
+import { formatNewPlayer } from '../utilities/formatNewPlayer';
 import { Player } from '../entities/player.entity';
 import { PlayerService } from '../services/player.service';
 import { getMatch } from '../utilities/getMatch';
 
 export async function checkTodaysPlayers(
-  newPlayers: Player[],
+  todaysPlayers: Partial<Player>[],
   playerService: PlayerService,
 ) {
-  const playerNhlIds = newPlayers.map((game) => game.nhlId);
-  const knownGames = await playerService.findByNhlIds(playerNhlIds);
+  const playerNhlIds = todaysPlayers.map((game) => game.nhlId);
+  const knownPlayers = await playerService.findByNhlIds(playerNhlIds);
 
-  for (const newPlayer of newPlayers) {
-    const match = getMatch(newPlayer, knownGames, 'nhlId');
+  const newPlayerList = [];
+  let recognizedPlayerCount = 0;
+
+  for (const newPlayer of todaysPlayers) {
+    const match = getMatch(newPlayer, knownPlayers, 'nhlId');
 
     if (!match) {
-      try {
-        console.info('Found new player: ' + newPlayer.fullName);
-        await playerService.create(newPlayer);
-        console.info('Created DB entry for ' + newPlayer.fullName + '\n');
-      } catch (err) {
-        console.error(err);
-      }
+      newPlayerList.push(newPlayer.nhlId);
       continue;
     }
 
+    recognizedPlayerCount++;
+
     // If these change, it will ripple back through time to affect historical data.
     // That might just be a 'live with it,' for today.
-    const updateKeys = ['primaryNumber', 'active', 'currentTeam', 'position'];
+    const updateKeys = ['primaryNumber', 'currentTeam', 'position'];
 
     if (updateKeys.every((key) => newPlayer[key] === match[key])) {
       continue;
@@ -43,4 +45,64 @@ export async function checkTodaysPlayers(
       console.error(err);
     }
   }
+
+  console.log(
+    'Recognized ' +
+      recognizedPlayerCount +
+      ' players out of ' +
+      todaysPlayers.length,
+  );
+
+  if (!newPlayerList.length) {
+    return;
+  }
+
+  console.info('Meeting new players.  This may take a while. \n');
+
+  const payloads = [];
+  const playerNames = [];
+  let count = 1;
+  for (const newPlayerId of newPlayerList) {
+    try {
+      const response = await axios.get(
+        `https://statsapi.web.nhl.com/api/v1/people/${newPlayerId}`,
+      );
+      const playerData: PlayerResponseType = response?.data;
+
+      if (!playerData) {
+        throw new Error(
+          `No response from https://statsapi.web.nhl.com/api/v1/people/${newPlayerId}`,
+        );
+      }
+
+      const newPlayer = formatNewPlayer(playerData);
+      payloads.push(newPlayer);
+      process.stdout.write(`${count}\r`);
+      count++;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  console.info('Saving new players. \n');
+
+  for (const payload of payloads) {
+    try {
+      await playerService.create(payload);
+      playerNames.push(payload.fullName);
+      process.stdout.write(`${count}\r`);
+      count--;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  console.info(
+    'Added ' +
+      playerNames.length +
+      ' new players of an expected ' +
+      payloads.length +
+      '.',
+  );
+  console.info('A warm welcome to ' + playerNames.join(', ') + '\n');
 }

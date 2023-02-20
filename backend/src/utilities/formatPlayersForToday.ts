@@ -1,9 +1,9 @@
 import { AxiosResponse } from 'axios';
 import { Player } from '../entities/player.entity';
-import { Game } from '../entities/game.entity';
-import { GameResponseType } from '../types/GameResponseType';
 
-export function formatPlayersForToday(response: AxiosResponse<any, any>) {
+export function formatPlayersForToday(
+  response: AxiosResponse<any, any>,
+): Partial<Player>[] {
   const data = response?.data?.teams;
   if (!data) {
     return [];
@@ -24,22 +24,5 @@ export function formatPlayersForToday(response: AxiosResponse<any, any>) {
     });
   });
 
-  const games: any[] = data.games.map((nhlGame: GameResponseType) => {
-    if (!nhlGame) return undefined;
-    return {
-      nhlId: nhlGame.gamePk,
-      gameDate: data.date,
-      gameTime: new Date(nhlGame.gameDate),
-      homeTeam: nhlGame.teams.home.team.id,
-      awayTeam: nhlGame.teams.away.team.id,
-      status: nhlGame.status.statusCode,
-      homeScore: nhlGame.teams.home.score,
-      awayScore: nhlGame.teams.away.score,
-      assists: 0,
-      hits: 0,
-      penaltyMinutes: 0,
-    };
-  });
-
-  return games;
+  return players;
 }
