@@ -7,15 +7,14 @@ import { checkTodaysTeams } from './checkTodaysTeams';
 import { checkTodaysGames } from './checkTodaysGames';
 import { getTodaysPlayers } from './getTodaysPlayers';
 import { formatGamesForToday } from '../utilities/formatGamesForToday';
-import { formatPlayersForToday } from '../utilities/formatPlayersForToday';
-import { Player } from '../entities/player.entity';
 import { PlayerService } from '../services/player.service';
+import { checkTodaysPlayers } from './checkTodaysPlayers';
 
 export async function initDailyGames(
   gameService: GameService,
   teamService: TeamService,
   playerService: PlayerService,
-): Promise<true | string> {
+): Promise<boolean> {
   let games: Game[];
 
   try {
@@ -23,13 +22,14 @@ export async function initDailyGames(
       'https://statsapi.web.nhl.com/api/v1/schedule',
     );
     games = formatGamesForToday(response);
-    console.info(games.length + ' games Found. \n', games);
+    console.info(games.length + ' games Found. \n');
   } catch (err) {
     return err.toString();
   }
 
   if (!games || !games.length) {
-    return 'No games found today.';
+    console.info('No games found today.');
+    return false;
   }
 
   const nhlIds = games.map((game) => game.nhlId);
@@ -42,6 +42,7 @@ export async function initDailyGames(
   await checkTodaysGames(games, gameService);
 
   const todaysPlayers = await getTodaysPlayers(games);
+  await checkTodaysPlayers(todaysPlayers, playerService);
 
   return true;
 }
