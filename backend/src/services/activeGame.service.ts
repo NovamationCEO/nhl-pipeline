@@ -15,6 +15,10 @@ export class ActiveGameService {
     return this.activeGameRepository.save(activeGame);
   }
 
+  async getAll(): Promise<ActiveGame[]> {
+    return this.activeGameRepository.find();
+  }
+
   async findById(id: number): Promise<ActiveGame> {
     return this.activeGameRepository.findOneBy({ id });
   }

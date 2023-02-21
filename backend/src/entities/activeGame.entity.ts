@@ -17,4 +17,7 @@ export class ActiveGame {
 
   @Column()
   lastUpdated: string;
+
+  @Column()
+  streaming: boolean;
 }

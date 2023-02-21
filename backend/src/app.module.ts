@@ -17,6 +17,7 @@ import { initDailyGames } from './processes/initDailyGames';
 import { sharedDataSourceSettings } from './data-source';
 import { ActiveGameService } from './services/activeGame.service';
 import { ActiveGameController } from './controllers/activeGame.controller';
+import { checkActiveGames } from './processes/checkActiveGames';
 
 @Module({
   imports: [
@@ -62,5 +63,10 @@ export class AppModule {
         activeGameService,
       );
     });
+
+    cron.schedule('*/5 * * * *'),
+      () => {
+        checkActiveGames(activeGameService);
+      };
   }
 }
