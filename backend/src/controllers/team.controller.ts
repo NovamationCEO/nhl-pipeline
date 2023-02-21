@@ -18,7 +18,7 @@ export class TeamController {
   }
 
   @Get('nhl/:id')
-  async findByNhlId(@Param('id') id: number): Promise<Team> {
+  async findByNhlId(@Param('id') id: string): Promise<Team> {
     return this.teamService.findByNhlId(id);
   }
 

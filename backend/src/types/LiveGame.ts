@@ -1,7 +1,7 @@
 import { LivePlay } from './LivePlay';
 
 export type LiveGame = {
-  nhlId: number;
+  nhlId: string;
   timeString: string;
   status: string;
   plays: LivePlay[];

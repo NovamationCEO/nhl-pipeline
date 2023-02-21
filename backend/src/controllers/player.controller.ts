@@ -18,7 +18,7 @@ export class PlayerController {
   }
 
   @Get('nhl/:id')
-  async findByNhlId(@Param('id') id: number): Promise<Player> {
+  async findByNhlId(@Param('id') id: string): Promise<Player> {
     return this.playerService.findByNhlId(id);
   }
 

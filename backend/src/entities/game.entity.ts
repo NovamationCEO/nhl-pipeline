@@ -7,7 +7,7 @@ export class Game {
 
   @Column()
   @Index()
-  nhlId: number;
+  nhlId: string;
 
   @Column()
   gameDate: string;
@@ -16,10 +16,10 @@ export class Game {
   gameTime: Date;
 
   @Column()
-  awayTeam: number;
+  awayTeam: string;
 
   @Column()
-  homeTeam: number;
+  homeTeam: string;
 
   @Column()
   status: string;

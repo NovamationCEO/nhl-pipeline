@@ -28,7 +28,7 @@ export class GameController {
   }
 
   @Get('nhl/:id')
-  async findByNhlId(@Param('id') id: number): Promise<Game> {
+  async findByNhlId(@Param('id') id: string): Promise<Game> {
     return this.gameService.findByNhlId(id);
   }
 

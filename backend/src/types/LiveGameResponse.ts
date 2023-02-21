@@ -1,7 +1,7 @@
 import { LiveDataResponse } from './LiveDataResponse';
 
 export type LiveGameResponse = {
-  gamePk: number;
+  gamePk: string;
   link: string;
   metaData: {
     wait: number;
@@ -13,7 +13,7 @@ export type LiveGameResponse = {
 
 type GameData = {
   game: {
-    pk: number;
+    pk: string;
     season: string;
     type: string;
   };
@@ -33,18 +33,18 @@ type GameData = {
   };
   players: { [x: string]: PlayerData };
   venue: {
-    id: number;
+    id: string;
     name: string;
     link: string;
   };
 };
 
 type TeamData = {
-  id: number;
+  id: string;
   name: string;
   link: string;
   venue: {
-    id: number;
+    id: string;
     name: string;
     link: string;
     city: string;
@@ -56,26 +56,26 @@ type TeamData = {
   locationName: string;
   firstYearOfPlay: string;
   division: {
-    id: number;
+    id: string;
     name: string;
     nameShort: string;
     link: string;
     abbreviation: string;
   };
   conference: {
-    id: number;
+    id: string;
     name: string;
     link: string;
   };
-  franchise: { franchiseId: number; teamName: string; link: string };
+  franchise: { franchiseid: string; teamName: string; link: string };
   shortName: string;
   officialSiteUrl: string;
-  franchiseId: number;
+  franchiseid: string;
   active: boolean;
 };
 
 type PlayerData = {
-  id: number;
+  id: string;
   fullName: string;
   link: string;
   firstName: string;
@@ -94,7 +94,7 @@ type PlayerData = {
   rookie: boolean;
   shootsCatches: string;
   rosterStatus: string;
-  currentTeam: { id: number; name: string; link: string; triCode: string };
+  currentTeam: { id: string; name: string; link: string; triCode: string };
   primaryPosition: {
     code: string;
     name: string;

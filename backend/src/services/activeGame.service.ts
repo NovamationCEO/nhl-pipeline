@@ -23,11 +23,11 @@ export class ActiveGameService {
     return this.activeGameRepository.findOneBy({ id });
   }
 
-  async findByNhlId(id: number): Promise<ActiveGame> {
+  async findByNhlId(id: string): Promise<ActiveGame> {
     return this.activeGameRepository.findOneBy({ nhlId: id });
   }
 
-  async findByNhlIds(ids: number[]): Promise<ActiveGame[]> {
+  async findByNhlIds(ids: string[]): Promise<ActiveGame[]> {
     return this.activeGameRepository.findBy({ nhlId: In(ids) });
   }
 

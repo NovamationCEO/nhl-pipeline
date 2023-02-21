@@ -7,7 +7,7 @@ export class Team {
 
   @Column()
   @Index()
-  nhlId: number;
+  nhlId: string;
 
   @Column()
   name: string;

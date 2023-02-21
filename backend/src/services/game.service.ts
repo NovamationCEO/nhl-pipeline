@@ -18,11 +18,11 @@ export class GameService {
     return this.gameRepository.findOneBy({ id });
   }
 
-  async findByNhlId(id: number): Promise<Game> {
+  async findByNhlId(id: string): Promise<Game> {
     return this.gameRepository.findOneBy({ nhlId: id });
   }
 
-  async findByNhlIds(ids: number[]): Promise<Game[]> {
+  async findByNhlIds(ids: string[]): Promise<Game[]> {
     return this.gameRepository.findBy({ nhlId: In(ids) });
   }
 

@@ -18,11 +18,11 @@ export class PlayerService {
     return this.playerRepository.findOneBy({ id });
   }
 
-  async findByNhlId(id: number): Promise<Player> {
+  async findByNhlId(id: string): Promise<Player> {
     return this.playerRepository.findOneBy({ nhlId: id });
   }
 
-  async findByNhlIds(ids: number[]): Promise<Player[]> {
+  async findByNhlIds(ids: string[]): Promise<Player[]> {
     return this.playerRepository.findBy({ nhlId: In(ids) });
   }
 

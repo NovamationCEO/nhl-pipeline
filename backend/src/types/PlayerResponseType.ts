@@ -2,7 +2,7 @@ export type PlayerResponseType = {
   copyright: string;
   people: [
     {
-      id: number;
+      id: string;
       fullName: string;
       link: string;
       firstName: string;

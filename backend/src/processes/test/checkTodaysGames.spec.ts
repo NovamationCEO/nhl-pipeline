@@ -80,7 +80,7 @@ describe('checkTodaysGames', () => {
     dbOutput[0].status = dbOutput[0].status + 1;
     dbOutput[4].homeScore = dbOutput[4].homeScore + 2;
     dbOutput[5].awayScore = dbOutput[5].awayScore + 3;
-    dbOutput[6].homeTeam = dbOutput[6].homeTeam + 2; //  Meaningless, should not trigger anything.
+    dbOutput[6].homeTeam = '57849345'; //  Meaningless, should not trigger anything.
 
     jest.spyOn(gameService, 'findByNhlIds').mockResolvedValue(dbOutput);
 

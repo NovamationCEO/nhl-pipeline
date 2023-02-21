@@ -7,7 +7,7 @@ export class ActiveGame {
 
   @Column()
   @Index()
-  nhlId: number;
+  nhlId: string;
 
   @Column()
   startTime: Date;
