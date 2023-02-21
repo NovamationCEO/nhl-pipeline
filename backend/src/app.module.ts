@@ -15,6 +15,8 @@ import { GameService } from './services/game.service';
 import { Game } from './entities/game.entity';
 import { initDailyGames } from './processes/initDailyGames';
 import { sharedDataSourceSettings } from './data-source';
+import { ActiveGameService } from './services/activeGame.service';
+import { ActiveGameController } from './controllers/activeGame.controller';
 
 @Module({
   imports: [
@@ -31,21 +33,34 @@ import { sharedDataSourceSettings } from './data-source';
     PlayerController,
     TeamController,
     GameController,
+    ActiveGameController,
   ],
-  providers: [AppService, PlayerService, TeamService, GameService],
+  providers: [
+    AppService,
+    PlayerService,
+    TeamService,
+    GameService,
+    ActiveGameService,
+  ],
 })
 export class AppModule {
   constructor(
     private gameService: GameService,
     private teamService: TeamService,
     private playerService: PlayerService,
+    private activeGameService: ActiveGameService,
   ) {
     // Initial setup, because this is running locally and is often 'off.'
-    initDailyGames(gameService, teamService, playerService);
+    initDailyGames(gameService, teamService, playerService, activeGameService);
 
     // Cron for ongoing global-level tasks
     cron.schedule('0 0,12 * * *', () => {
-      initDailyGames(gameService, teamService, playerService);
+      initDailyGames(
+        gameService,
+        teamService,
+        playerService,
+        activeGameService,
+      );
     });
   }
 }
