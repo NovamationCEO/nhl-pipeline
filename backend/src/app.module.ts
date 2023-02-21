@@ -54,7 +54,7 @@ export class AppModule {
     initDailyGames(gameService, teamService, playerService, activeGameService);
 
     // Cron for ongoing global-level tasks
-    cron.schedule('0 0,12 * * *', () => {
+    cron.schedule('0 * * * *', () => {
       initDailyGames(
         gameService,
         teamService,

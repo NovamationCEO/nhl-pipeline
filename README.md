@@ -5,32 +5,26 @@ I should probably move to-dos here and away from Trello, to provide some transpa
 
 # CURRENTLY
 
-- Today's games initialize at midnight, and also again at noon just in case something has been added.
-    - Does that ever happen in the real world?  Probably not.
-    - Any danger of a delayed update blanking the games for the day?  Possibly.
-    - Is that midnight system time?  Maybe safer to just set it to hourly.
-
-- Today's games also initialize when the server starts.
-    - If this were always running, that wouldn't be an issue; but, this is very much a locally-running sample.
+- Today's games initialize at startup and on the hour.
+    - There doesn't seem to be a risk of rate limiting, and it's better not to risk a delay or timezone issue leaving 12 hours of non-coverage.
 
 # TO DO
 
-- Create list of matches to query more specifically.  How to store in memory?  Is DB too clunky?
+- Query against ActiveGames
 
-- Curate that list of matches; close when appropriate.
-
+- Curate that list of games; close when appropriate.
 
 - Consider adding historical data if the database is empty enough to be boring.
 
 - README setup instructions.
     - Can setting up database be automated in a reasonable amount of time?
 
-- Game.  Add 'assists,' 'hits,' and 'penalty minutes.'
-    - Does not come from Schedule
+- Add GameEvent for 'assists,' 'hits,' and 'penalty minutes.'
+    - Seems like it must come from being live.
     
 - Testing.  I haven't wanted to test just database functioning, but it's starting to get into 'real' logic.
 
-- Tie tables together with foreign keys.  Make sure they're populated in the right order, still.
+- Once schema settles down, tie tables together with foreign keys.  Make sure they're populated in the right order, still.
 
 - Create APIs with 'pretty' output to meet requirements.
 
