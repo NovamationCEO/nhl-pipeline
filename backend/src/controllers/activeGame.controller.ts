@@ -29,7 +29,7 @@ export class ActiveGameController {
   }
 
   @Get('nhl/:id')
-  async findByNhlId(@Param('id') id: string): Promise<ActiveGame> {
+  async findByNhlId(@Param('id') id: number): Promise<ActiveGame> {
     return this.activeGameService.findByNhlId(id);
   }
 

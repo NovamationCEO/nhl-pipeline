@@ -1,7 +1,7 @@
 import { LiveDataResponse } from './LiveDataResponse';
 
 export type LiveGameResponse = {
-  gamePk: string;
+  gamePk: number;
   link: string;
   metaData: {
     wait: number;
@@ -13,7 +13,7 @@ export type LiveGameResponse = {
 
 type GameData = {
   game: {
-    pk: string;
+    pk: number;
     season: string;
     type: string;
   };

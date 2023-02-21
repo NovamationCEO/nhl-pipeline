@@ -7,7 +7,7 @@ export class Player {
 
   @Column()
   @Index()
-  nhlId: string;
+  nhlId: number;
 
   @Column()
   fullName: string;

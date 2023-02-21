@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { formatLiveGames } from '../utilities/formatLiveGames';
 
-export async function queryLive(nhlId: string, lastUpdate: string) {
+export async function queryLive(nhlId: number, lastUpdate: string) {
   const apiUrl = `https://statsapi.web.nhl.com/api/v1/game/${nhlId}/feed/live/diffPatch?startTimecode=${lastUpdate}`;
 
   try {
@@ -16,6 +16,4 @@ export async function queryLive(nhlId: string, lastUpdate: string) {
   } catch (err) {
     console.error(err);
   }
-
-  //   const gameObservable = new Observable<ActiveGame>();
 }
