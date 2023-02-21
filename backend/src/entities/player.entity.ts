@@ -1,10 +1,8 @@
-import { Optional } from '@nestjs/common';
 import { Entity, PrimaryGeneratedColumn, Column, Index } from 'typeorm';
 
 @Entity()
 export class Player {
   @PrimaryGeneratedColumn()
-  @Optional()
   id?: number;
 
   @Column()
