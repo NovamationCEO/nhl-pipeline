@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 import { Game } from '../entities/game.entity';
 import { GameResponseType } from '../types/GameResponseType';
 
-export function formatGamesForToday(response: AxiosResponse<any, any>) {
+export function formatGamesForToday(response: AxiosResponse<any, any>): Game[] {
   const data = response?.data?.dates?.[0];
   if (!data) {
     return [];

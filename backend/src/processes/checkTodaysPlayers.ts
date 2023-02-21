@@ -90,8 +90,6 @@ export async function checkTodaysPlayers(
     try {
       await playerService.create(payload);
       playerNames.push(payload.fullName);
-      process.stdout.write(`\r${count}`);
-      count--;
     } catch (err) {
       console.error(err);
     }

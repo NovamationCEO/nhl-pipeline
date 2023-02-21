@@ -20,6 +20,7 @@ export async function checkTodaysGames(
     if (!match) {
       try {
         console.info('Found new game: ' + gameName);
+
         await gameService.create(newGame);
         console.info('Created DB entry for ' + gameName);
       } catch (err) {
