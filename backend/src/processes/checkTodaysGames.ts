@@ -1,6 +1,6 @@
 import { ActiveGame } from '../entities/activeGame.entity';
 import { ActiveGameService } from '../services/activeGame.service';
-import { getTimeString } from '../services/getTimeString';
+import { getTimeString } from '../utilities/getTimeString';
 import { Game } from '../entities/game.entity';
 import { GameService } from '../services/game.service';
 import { getMatch } from '../utilities/getMatch';
