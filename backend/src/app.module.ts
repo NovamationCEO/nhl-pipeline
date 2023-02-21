@@ -66,7 +66,7 @@ export class AppModule {
 
     cron.schedule('*/5 * * * *'),
       () => {
-        checkActiveGames(activeGameService);
+        checkActiveGames(activeGameService, gameService);
       };
   }
 }
