@@ -2,12 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ActiveGame } from '../entities/activeGame.entity';
 import { DeleteResult, In, Repository, UpdateResult } from 'typeorm';
-import { Game } from '../entities/game.entity';
 
 @Injectable()
 export class ActiveGameService {
   constructor(
-    @InjectRepository(Game)
+    @InjectRepository(ActiveGame)
     private readonly activeGameRepository: Repository<ActiveGame>,
   ) {}
 
@@ -23,11 +22,11 @@ export class ActiveGameService {
     return this.activeGameRepository.findOneBy({ id });
   }
 
-  async findByNhlId(id: string): Promise<ActiveGame> {
+  async findByNhlId(id: number): Promise<ActiveGame> {
     return this.activeGameRepository.findOneBy({ nhlId: id });
   }
 
-  async findByNhlIds(ids: string[]): Promise<ActiveGame[]> {
+  async findByNhlIds(ids: number[]): Promise<ActiveGame[]> {
     return this.activeGameRepository.findBy({ nhlId: In(ids) });
   }
 

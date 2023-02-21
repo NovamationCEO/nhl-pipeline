@@ -17,11 +17,11 @@ import { initDailyGames } from './processes/initDailyGames';
 import { sharedDataSourceSettings } from './data-source';
 import { ActiveGameService } from './services/activeGame.service';
 import { ActiveGameController } from './controllers/activeGame.controller';
-import { checkActiveGames } from './processes/checkActiveGames';
+import { ActiveGame } from './entities/activeGame.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Player, Team, Game]),
+    TypeOrmModule.forFeature([Player, Team, Game, ActiveGame]),
     TypeOrmModule.forRoot({
       ...sharedDataSourceSettings,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
@@ -64,9 +64,8 @@ export class AppModule {
       );
     });
 
-    cron.schedule('*/5 * * * *'),
-      () => {
-        checkActiveGames(activeGameService, gameService);
-      };
+    // cron.schedule('*/5 * * * *', () => {
+    //   checkActiveGames(activeGameService, gameService);
+    // });
   }
 }
