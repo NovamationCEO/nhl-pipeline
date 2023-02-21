@@ -1,3 +1,6 @@
+import { ActiveGame } from '../entities/activeGame.entity';
+import { ActiveGameService } from '../services/activeGame.service';
+import { getTimeString } from '../services/getTimeString';
 import { Game } from '../entities/game.entity';
 import { GameService } from '../services/game.service';
 import { getMatch } from '../utilities/getMatch';
@@ -5,6 +8,7 @@ import { getMatch } from '../utilities/getMatch';
 export async function checkTodaysGames(
   newGames: Game[],
   gameService: GameService,
+  activeGameService: ActiveGameService,
 ) {
   const gameNhlIds = newGames.map((game) => game.nhlId);
   const knownGames = await gameService.findByNhlIds(gameNhlIds);
@@ -17,9 +21,23 @@ export async function checkTodaysGames(
       try {
         console.info('Found new game: ' + gameName);
         await gameService.create(newGame);
-        console.info('Created DB entry for ' + gameName + '\n');
+        console.info('Created DB entry for ' + gameName);
       } catch (err) {
         console.error(err);
+      }
+
+      const newActiveGame: ActiveGame = {
+        nhlId: newGame.nhlId,
+        status: newGame.status,
+        startTime: newGame.gameTime,
+        lastUpdated: getTimeString(),
+      };
+
+      try {
+        await activeGameService.create(newActiveGame);
+        console.info('Added to Active Game list.\n');
+      } catch (err) {
+        console.log(err);
       }
       continue;
     }

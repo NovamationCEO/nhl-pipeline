@@ -9,11 +9,13 @@ import { getTodaysPlayers } from './getTodaysPlayers';
 import { formatGamesForToday } from '../utilities/formatGamesForToday';
 import { PlayerService } from '../services/player.service';
 import { checkTodaysPlayers } from './checkTodaysPlayers';
+import { ActiveGameService } from '../services/activeGame.service';
 
 export async function initDailyGames(
   gameService: GameService,
   teamService: TeamService,
   playerService: PlayerService,
+  activeGameService: ActiveGameService,
 ): Promise<boolean> {
   let games: Game[];
 
@@ -39,7 +41,7 @@ export async function initDailyGames(
     await checkTodaysTeams(games, teamService);
   }
 
-  await checkTodaysGames(games, gameService);
+  await checkTodaysGames(games, gameService, activeGameService);
 
   const todaysPlayers = await getTodaysPlayers(games);
   await checkTodaysPlayers(todaysPlayers, playerService);
