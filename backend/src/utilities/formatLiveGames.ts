@@ -2,7 +2,11 @@ import { LiveGame } from 'src/types/LiveGame';
 import { LivePlay } from 'src/types/LivePlay';
 import { LiveGameResponse } from '../types/LiveGameResponse';
 
-export function formatLiveGames(res: LiveGameResponse): LiveGame {
+export function formatLiveGames(res: LiveGameResponse): LiveGame | undefined {
+  const allPlays = res?.liveData?.plays?.allPlays;
+  if (!allPlays || !allPlays.length) {
+    return undefined;
+  }
   const cherryPickedPlays = res.liveData.plays.allPlays.map((play) => {
     const roles = play.players?.map((player) => player.playerType) || [];
 

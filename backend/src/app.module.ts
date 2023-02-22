@@ -52,20 +52,23 @@ export class AppModule {
     private activeGameService: ActiveGameService,
   ) {
     // Initial setup, because this is running locally and is often 'off.'
-    initDailyGames(gameService, teamService, playerService, activeGameService);
+    initDailyGames(
+      true,
+      gameService,
+      teamService,
+      playerService,
+      activeGameService,
+    );
 
     // Cron for ongoing global-level tasks
     cron.schedule('0 * * * *', () => {
       initDailyGames(
+        false,
         gameService,
         teamService,
         playerService,
         activeGameService,
       );
     });
-
-    // cron.schedule('*/5 * * * *', () => {
-    //   checkActiveGames(activeGameService, gameService);
-    // });
   }
 }

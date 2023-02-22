@@ -10,8 +10,11 @@ import { formatGamesForToday } from '../utilities/formatGamesForToday';
 import { PlayerService } from '../services/player.service';
 import { checkTodaysPlayers } from './checkTodaysPlayers';
 import { ActiveGameService } from '../services/activeGame.service';
+import * as cron from 'node-cron';
+import { checkActiveGames } from './checkActiveGames';
 
 export async function initDailyGames(
+  isInitial: boolean,
   gameService: GameService,
   teamService: TeamService,
   playerService: PlayerService,
@@ -46,5 +49,17 @@ export async function initDailyGames(
   const todaysPlayers = await getTodaysPlayers(games);
   await checkTodaysPlayers(todaysPlayers, playerService);
 
+  if (isInitial) {
+    try {
+      activeGameService.initializeOnServerRestart();
+      console.log('Initialized Active Games after server restart.');
+    } catch (err) {
+      console.error('Unable to initialize Active Games after server restart.');
+      console.error(err);
+    }
+    cron.schedule('*/1 * * * *', () => {
+      checkActiveGames(activeGameService, gameService);
+    });
+  }
   return true;
 }

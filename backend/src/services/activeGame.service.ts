@@ -30,6 +30,14 @@ export class ActiveGameService {
     return this.activeGameRepository.findBy({ nhlId: In(ids) });
   }
 
+  async initializeOnServerRestart(): Promise<UpdateResult> {
+    return this.activeGameRepository
+      .createQueryBuilder()
+      .update(ActiveGame)
+      .set({ streaming: false })
+      .execute();
+  }
+
   async update(
     id: number,
     activeGame: Partial<ActiveGame>,
