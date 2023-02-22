@@ -148,9 +148,9 @@ export class PublicController {
       (await this.gameEventService.findByGameNhlId(nhlId)) || [];
     rawEvents.sort((a, b) => a.eventOrder - b.eventOrder);
 
-    const response = this.gameFormatter([rawGame], this.teamService) as any;
+    const game = this.gameFormatter([rawGame], this.teamService) as any;
 
-    return { game: response, events: this.eventFormatter(rawEvents) };
+    return { game, events: this.eventFormatter(rawEvents) };
   }
 
   eventFormatter(rawEvents: GameEvent[]): AnyObj {
