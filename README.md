@@ -10,12 +10,6 @@ I should probably move to-dos here and away from Trello, to provide some transpa
 
 # TO DO
 
-- Create APIs with 'pretty' output to meet requirements.
-
-- README setup instructions.
-
-- README instructions.
-
 - Testing.
     - Well, I fell face-first into the trap. Mocking a bunch of third-party API calls is time-consuming, and I've used up my time.
 
