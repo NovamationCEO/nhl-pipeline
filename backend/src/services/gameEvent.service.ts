@@ -27,7 +27,7 @@ export class GameEventService {
   }
 
   async findByGameNhlId(id: number): Promise<GameEvent[]> {
-    return this.gameEventRepository.findBy({ nhlId: id });
+    return this.gameEventRepository.findBy({ gameNhlId: id });
   }
 
   async update(
