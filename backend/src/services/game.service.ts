@@ -26,6 +26,15 @@ export class GameService {
     return this.gameRepository.findBy({ nhlId: In(ids) });
   }
 
+  async findByToday(): Promise<Game[]> {
+    const today = new Date().toISOString().substring(0, 10);
+    return this.gameRepository.findBy({ gameDate: today });
+  }
+
+  async findByDate(dateString: string): Promise<Game[]> {
+    return this.gameRepository.findBy({ gameDate: dateString });
+  }
+
   async update(id: number, game: Partial<Game>): Promise<UpdateResult> {
     return this.gameRepository.update(id, game);
   }
