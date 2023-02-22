@@ -10,11 +10,12 @@ export function streamGame(
   activeGameService: ActiveGameService,
   gameService: GameService,
 ) {
+  const endStatuses = ['5', '6', '7'];
   const obs = interval(5000) // emit a value every 5 seconds
     .pipe(
       switchMap(
         async () => await queryLive(activeGame.nhlId, activeGame.lastUpdated),
-      ), // switch to a new Observable that fetches data from the API
+      ),
     )
     .subscribe({
       next: async (freshGame) => {
@@ -30,6 +31,15 @@ export function streamGame(
             'Unable to find activeGame with nhlId ' + activeGame.nhlId,
           );
           throw new Error(err);
+        }
+
+        if (endStatuses.includes(activeGame.status)) {
+          obs.unsubscribe();
+          return;
+        }
+
+        if (!freshGame) {
+          return;
         }
 
         try {
@@ -68,7 +78,7 @@ export function streamGame(
           throw new Error(err);
         }
 
-        if (['5', '6', '7'].includes(freshGame.status)) {
+        if (endStatuses.includes(freshGame.status)) {
           obs.unsubscribe();
         }
       },
