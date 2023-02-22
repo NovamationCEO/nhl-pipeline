@@ -59,7 +59,7 @@ export async function initDailyGames(
       console.error('Unable to initialize Active Games after server restart.');
       console.error(err);
     }
-    cron.schedule('*/1 * * * *', () => {
+    cron.schedule('*/5 * * * *', () => {
       checkActiveGames(activeGameService, gameService, gameEventService);
     });
   }

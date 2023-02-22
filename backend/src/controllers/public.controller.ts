@@ -2,7 +2,6 @@ import { Controller, Get, Param } from '@nestjs/common';
 import { gameStatus } from '../constants/gameStatus';
 import { Game } from '../entities/game.entity';
 import { GameEvent } from '../entities/gameEvent.entity';
-import { ActiveGameService } from '../services/activeGame.service';
 import { GameService } from '../services/game.service';
 import { GameEventService } from '../services/gameEvent.service';
 import { PlayerService } from '../services/player.service';
@@ -13,7 +12,6 @@ import { AnyObj } from '../types/AnyObj';
 export class PublicController {
   constructor(
     private readonly playerService: PlayerService,
-    private readonly activeGameService: ActiveGameService,
     private readonly gameService: GameService,
     private readonly gameEventService: GameEventService,
     private readonly teamService: TeamService,
