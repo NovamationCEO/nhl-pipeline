@@ -13,7 +13,13 @@ export async function updateStreamedEvents(
   activeGame: ActiveGame,
   activeGameService: ActiveGameService,
 ): Promise<void> {
+  // Newest Event doesn't seem to be working as expected.  Sadly adding back in checking.
+  const storedEvents = await gameEventService.findByGameNhlId(storedGame.nhlId);
+
   for (const play of plays) {
+    if (storedEvents.findIndex((event) => event.nhlId === play.nhlId) >= 0) {
+      continue;
+    }
     await gameEventService.create(play);
   }
 

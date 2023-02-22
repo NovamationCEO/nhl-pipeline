@@ -21,6 +21,7 @@ import { ActiveGame } from './entities/activeGame.entity';
 import { GameEvent } from './entities/gameEvent.entity';
 import { GameEventController } from './controllers/gameEvent.controller';
 import { GameEventService } from './services/gameEvent.service';
+import { PublicController } from './controllers/public.controller';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { GameEventService } from './services/gameEvent.service';
     GameController,
     ActiveGameController,
     GameEventController,
+    PublicController,
   ],
   providers: [
     AppService,
