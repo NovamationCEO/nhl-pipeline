@@ -22,7 +22,7 @@ export async function checkActiveGames(
 
     const timeToStartPolling =
       new Date(game.startTime).getTime() - 5 * 60 * 1000;
-    const startPolling = timeToStartPolling >= Date.now();
+    const startPolling = timeToStartPolling <= Date.now();
 
     if (startPolling && !game.streaming) {
       activeGameService.update(game.id, { streaming: true });
