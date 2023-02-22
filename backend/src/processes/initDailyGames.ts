@@ -54,7 +54,7 @@ export async function initDailyGames(
   if (isInitial) {
     try {
       activeGameService.initializeOnServerRestart();
-      console.log('Initialized Active Games after server restart.');
+      console.info('Initialized Active Games after server restart.');
     } catch (err) {
       console.error('Unable to initialize Active Games after server restart.');
       console.error(err);

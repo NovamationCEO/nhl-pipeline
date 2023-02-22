@@ -40,7 +40,7 @@ export async function checkTodaysGames(
         await activeGameService.create(newActiveGame);
         console.info('Added to Active Game list.\n');
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
       continue;
     }

@@ -14,7 +14,7 @@ export function streamGame(
   gameEventService: GameEventService,
 ) {
   const endStatuses = ['5', '6', '7'];
-  const obs = interval(5000) // emit a value every 5 seconds
+  const obs = interval(10000) // emit a value every 10 seconds, 5 hit rate limiting, I think.
     .pipe(
       switchMap(
         async () => await queryLive(activeGame.nhlId, activeGame.newestEvent),

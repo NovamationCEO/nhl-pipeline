@@ -46,11 +46,12 @@ export async function checkTodaysPlayers(
     }
   }
 
-  console.log(
+  console.info(
     'Recognized ' +
       recognizedPlayerCount +
       ' players out of ' +
-      todaysPlayers.length,
+      todaysPlayers.length +
+      '.\n',
   );
 
   if (!newPlayerList.length) {
