@@ -12,11 +12,7 @@ export function streamGame(
 ) {
   const endStatuses = ['5', '6', '7'];
   const obs = interval(5000) // emit a value every 5 seconds
-    .pipe(
-      switchMap(
-        async () => await queryLive(activeGame.nhlId, activeGame.lastUpdated),
-      ),
-    )
+    .pipe(switchMap(async () => await queryLive(activeGame.nhlId)))
     .subscribe({
       next: async (freshGame) => {
         let storedActiveGame;
