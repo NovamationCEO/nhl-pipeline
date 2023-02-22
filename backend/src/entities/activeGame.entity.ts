@@ -20,4 +20,7 @@ export class ActiveGame {
 
   @Column()
   streaming: boolean;
+
+  @Column()
+  newestEvent: number;
 }

@@ -33,6 +33,7 @@ export async function checkTodaysGames(
         startTime: newGame.gameTime,
         lastUpdated: getTimeString(),
         streaming: false,
+        newestEvent: -1,
       };
 
       try {
