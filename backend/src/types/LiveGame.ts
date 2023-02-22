@@ -1,10 +1,10 @@
-import { LivePlay } from './LivePlay';
+import { GameEvent } from '../entities/gameEvent.entity';
 
 export type LiveGame = {
   nhlId: number;
   timeString: string;
   status: string;
-  plays: LivePlay[];
+  plays: GameEvent[];
   home: number;
   away: number;
 };

@@ -3,12 +3,15 @@ import { switchMap } from 'rxjs/operators';
 import { ActiveGame } from '../entities/activeGame.entity';
 import { ActiveGameService } from '../services/activeGame.service';
 import { GameService } from '../services/game.service';
+import { GameEventService } from '../services/gameEvent.service';
 import { queryLive } from './queryLive';
+import { updateStreamedEvents } from './updateStreamedEvents';
 
 export function streamGame(
   activeGame: ActiveGame,
   activeGameService: ActiveGameService,
   gameService: GameService,
+  gameEventService: GameEventService,
 ) {
   const endStatuses = ['5', '6', '7'];
   const obs = interval(5000) // emit a value every 5 seconds
@@ -54,17 +57,24 @@ export function streamGame(
           throw new Error(err);
         }
 
-        // try {
-        //   updateStreamedEvents(freshGame.plays);
-        // } catch (err) {
-        //   console.error(err);
-        // }
-
         try {
           storedGame = await gameService.findByNhlId(activeGame.nhlId);
         } catch (err) {
           console.error('Cannot find game with nhlId ' + activeGame.nhlId);
           throw new Error(err);
+        }
+
+        try {
+          updateStreamedEvents(
+            freshGame.plays,
+            gameEventService,
+            storedGame,
+            gameService,
+            activeGame,
+            activeGameService,
+          );
+        } catch (err) {
+          console.error(err);
         }
 
         try {

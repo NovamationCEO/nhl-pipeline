@@ -18,10 +18,13 @@ import { sharedDataSourceSettings } from './data-source';
 import { ActiveGameService } from './services/activeGame.service';
 import { ActiveGameController } from './controllers/activeGame.controller';
 import { ActiveGame } from './entities/activeGame.entity';
+import { GameEvent } from './entities/gameEvent.entity';
+import { GameEventController } from './controllers/gameEvent.controller';
+import { GameEventService } from './services/gameEvent.service';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Player, Team, Game, ActiveGame]),
+    TypeOrmModule.forFeature([Player, Team, Game, ActiveGame, GameEvent]),
     TypeOrmModule.forRoot({
       ...sharedDataSourceSettings,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
@@ -35,6 +38,7 @@ import { ActiveGame } from './entities/activeGame.entity';
     TeamController,
     GameController,
     ActiveGameController,
+    GameEventController,
   ],
   providers: [
     AppService,
@@ -42,6 +46,7 @@ import { ActiveGame } from './entities/activeGame.entity';
     TeamService,
     GameService,
     ActiveGameService,
+    GameEventService,
   ],
 })
 export class AppModule {
@@ -50,6 +55,7 @@ export class AppModule {
     private teamService: TeamService,
     private playerService: PlayerService,
     private activeGameService: ActiveGameService,
+    private gameEventService: GameEventService,
   ) {
     // Initial setup, because this is running locally and is often 'off.'
     initDailyGames(
@@ -58,6 +64,7 @@ export class AppModule {
       teamService,
       playerService,
       activeGameService,
+      gameEventService,
     );
 
     // Cron for ongoing global-level tasks
@@ -68,6 +75,7 @@ export class AppModule {
         teamService,
         playerService,
         activeGameService,
+        gameEventService,
       );
     });
   }

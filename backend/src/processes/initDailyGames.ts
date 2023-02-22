@@ -12,6 +12,7 @@ import { checkTodaysPlayers } from './checkTodaysPlayers';
 import { ActiveGameService } from '../services/activeGame.service';
 import * as cron from 'node-cron';
 import { checkActiveGames } from './checkActiveGames';
+import { GameEventService } from '../services/gameEvent.service';
 
 export async function initDailyGames(
   isInitial: boolean,
@@ -19,6 +20,7 @@ export async function initDailyGames(
   teamService: TeamService,
   playerService: PlayerService,
   activeGameService: ActiveGameService,
+  gameEventService: GameEventService,
 ): Promise<boolean> {
   let games: Game[];
 
@@ -58,7 +60,7 @@ export async function initDailyGames(
       console.error(err);
     }
     cron.schedule('*/1 * * * *', () => {
-      checkActiveGames(activeGameService, gameService);
+      checkActiveGames(activeGameService, gameService, gameEventService);
     });
   }
   return true;

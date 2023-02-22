@@ -1,5 +1,5 @@
 import { LiveGame } from 'src/types/LiveGame';
-import { LivePlay } from 'src/types/LivePlay';
+import { GameEvent } from '../entities/gameEvent.entity';
 import { LiveGameResponse } from '../types/LiveGameResponse';
 
 export function formatLiveGames(
@@ -11,13 +11,14 @@ export function formatLiveGames(
     return undefined;
   }
   const cherryPickedPlays = allPlays
-    .filter((play) => play.about.eventId > newestEvent)
+    .filter((play) => play.about.eventIdx > newestEvent)
     .map((play) => {
       const roles = play.players?.map((player) => player.playerType) || [];
 
-      const newPlay: LivePlay = {
-        event: play.result.event,
-        eventId: play.about.eventId,
+      const newPlay: GameEvent = {
+        eventName: play.result.event,
+        nhlId: play.about.eventId,
+        gameNhlId: res.gameData.game.pk,
         eventOrder: play.about.eventIdx,
         headline: play.result.description,
         assists: roles.filter((r) => r.toUpperCase() === 'ASSIST').length,

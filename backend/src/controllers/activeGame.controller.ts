@@ -6,7 +6,7 @@ import { Game } from '../entities/game.entity';
 import { ActiveGameService } from '../services/activeGame.service';
 import { ActiveGame } from '../entities/activeGame.entity';
 
-@Controller('game')
+@Controller('activeGame')
 export class ActiveGameController {
   constructor(private readonly activeGameService: ActiveGameService) {}
 

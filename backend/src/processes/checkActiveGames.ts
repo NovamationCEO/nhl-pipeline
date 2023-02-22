@@ -1,10 +1,12 @@
 import { ActiveGameService } from 'src/services/activeGame.service';
 import { GameService } from '../services/game.service';
+import { GameEventService } from '../services/gameEvent.service';
 import { streamGame } from './streamGame';
 
 export async function checkActiveGames(
   activeGameService: ActiveGameService,
   gameService: GameService,
+  gameEventService: GameEventService,
 ) {
   const activeGames = await activeGameService.getAll();
 
@@ -26,7 +28,7 @@ export async function checkActiveGames(
 
     if (startPolling && !game.streaming) {
       activeGameService.update(game.id, { streaming: true });
-      streamGame(game, activeGameService, gameService);
+      streamGame(game, activeGameService, gameService, gameEventService);
     }
   }
 }
