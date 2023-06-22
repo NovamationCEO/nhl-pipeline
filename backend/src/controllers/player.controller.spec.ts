@@ -6,7 +6,7 @@ import { AppModule } from '../app.module';
 // TODO: Issues with database connection being 'not established' AFTER tests pass.
 // Commenting for now.
 
-describe.skip('Player Controller', () => {
+describe('Player Controller', () => {
   let app: INestApplication;
 
   beforeEach(async () => {

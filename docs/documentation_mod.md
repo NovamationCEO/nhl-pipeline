@@ -8,11 +8,11 @@ Below you will find complete documentation to a public NHL API. You will not nee
 
 [Game](#game)
 
-  [Game-IDs](#game-ids)
+[Game-IDs](#game-ids)
 
-  [Game Status](#game-status)
+[Game Status](#game-status)
 
-  [Play Types](#play-types)
+[Play Types](#play-types)
 
 [Schedule](#schedule)
 
